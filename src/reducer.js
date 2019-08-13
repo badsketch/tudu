@@ -18,7 +18,7 @@ export const reducer = (state = initialState, action) => {
         case 'COMPLETE_TODO':
             return {
                 todos: state.todos.map((todo, idx) => {
-                    if (idx == action.index) {
+                    if (idx === action.index) {
                         return {
                             ...todo,
                             completed: !todo.completed

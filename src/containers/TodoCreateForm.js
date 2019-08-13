@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AddTodo } from '../actions';
 import { connect } from 'react-redux';
 
-function TodoForm(props) {
+function TodoCreateForm(props) {
 
     const [todoText, setTodoText] = useState("");
 
@@ -25,4 +25,4 @@ function TodoForm(props) {
     )
 }
 
-export default connect()(TodoForm);
+export default connect()(TodoCreateForm);

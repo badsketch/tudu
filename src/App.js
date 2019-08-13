@@ -1,43 +1,14 @@
 import React from 'react';
 import './App.css';
-import { connect } from 'react-redux';
-import TodoForm from './containers/TodoForm';
+import TodoList from 'containers/TodoList';
 
-function App(props) {
-
-  const handleClick = index => {
-    props.dispatch({ type: 'COMPLETE_TODO', index })
-  }
-  const handleRemove = index => {
-    props.dispatch({ type: 'REMOVE_TODO', index });
-  }
+function App() {
   return (
     <div className="App">
-      <header>Todos</header>
-        {
-          props.todoList.map((todo, idx) =>
-          <div>
-            <span 
-              key={idx} 
-              style={{textDecoration: todo.completed ? 'line-through' : ''}}
-              onClick={() => handleClick(idx)}  
-              >
-              {todo.desc}
-            </span>
-            <span onClick={() => handleRemove(idx)}>&times;</span>
-
-          </div> 
-          )
-        }
-        <TodoForm />
+      <TodoList />
     </div>
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    todoList: state.todos
-  }
-}
 
-export default connect(mapStateToProps)(App);
+export default App;
