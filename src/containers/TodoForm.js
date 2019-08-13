@@ -12,8 +12,8 @@ function TodoForm(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(props);
         props.dispatch(AddTodo(todoText));
+        setTodoText("");
     }
     return (
         <form>
