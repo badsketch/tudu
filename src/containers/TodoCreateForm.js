@@ -12,7 +12,7 @@ function TodoCreateForm(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        props.dispatch(AddTodo(todoText));
+        props.dispatch(AddTodo(todoText, props.todoColumn));
         setTodoText("");
     }
     return (
