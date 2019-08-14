@@ -17,7 +17,7 @@ class TodoList extends React.Component {
     render() {
         return (
             <div id="todo-list">
-                <header>{this.props.column}</header>
+                <h3 className="title">{this.props.column}</h3>
                 {
                     this.props.todoList.map((todo, idx) => 
                         <TodoItem 

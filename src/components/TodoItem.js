@@ -3,14 +3,14 @@ import './TodoItem.css';
 
 function TodoItem(props) {
     return (
-        <div>
+        <div id="todo-item">
             <span 
             style={{textDecoration: props.completed ? 'line-through' : ''}}
             onClick={props.onClick}  
             >
                 {props.text}
             </span>
-            <span onClick={props.onRemove}>&times;</span>
+            <span class="remove" onClick={props.onRemove}>&times;</span>
     </div> 
     )
 }

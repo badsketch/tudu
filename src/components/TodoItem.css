@@ -1,2 +1,11 @@
 #todo-item {
+    padding: 5px;
+    margin: 5px 0px;
+    display: flex;
+    justify-content: space-between;
+    background-color: lightblue;
+}
+
+#todo-item .remove {
+    margin-left:40px;
 }

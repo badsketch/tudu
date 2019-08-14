@@ -1,6 +1,10 @@
 #todo-list-create {
-    flex: 1 1 0;
-
+    width: 350px;
+    flex-shrink: 0;
+    margin: 20px;
+    text-align: center;
+    border: 3px dotted lightblue;
+    box-sizing: border-box;
 }
 
 .plus-sign {

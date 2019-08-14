@@ -1,3 +1,13 @@
 #todo-list {
-    flex: 1 1 0;
+    width: 350px;
+    flex-shrink: 0;
+    overflow: auto;
+    margin: 20px;
+    border-radius: 4px;
+    padding: 10px;
+    border: 2px solid lightblue;
+}
+
+#todo-list .title {
+    text-align: center;
 }

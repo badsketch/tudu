@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './TodoCreateForm.css';
+
 import { AddTodo } from '../actions';
 import { connect } from 'react-redux';
 
@@ -16,11 +18,9 @@ function TodoCreateForm(props) {
         setTodoText("");
     }
     return (
-        <form>
-            <label>Add Todo:
-                <input type="text" value={todoText} onChange={handleChange}/>
-            </label>
-            <input type="submit" value="Submit" onClick={handleSubmit}/>
+        <form id="todo-create-form">
+            <input type="text" value={todoText} onChange={handleChange}/>
+            <input type="submit" value="Add Todo" onClick={handleSubmit}/>
         </form>
     )
 }
