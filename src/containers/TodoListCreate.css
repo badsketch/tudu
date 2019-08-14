@@ -1,12 +1,28 @@
 #todo-list-create {
     width: 350px;
     flex-shrink: 0;
-    margin: 20px;
+    margin: 15px;
     text-align: center;
     border: 3px dotted lightblue;
     box-sizing: border-box;
+    display: block;
+    border-radius: 4px;
 }
 
+.name-input {
+    position: relative;
+    top: 50%;
+    margin-top: 50%;
+}
 .plus-sign {
-    
+    height: 100px;
+    width: 100px;
+    line-height: 60px;
+    font-size: 60px;
+    border-radius: 50%;
+    background-color: rgba(173, 216, 230, 0.3);
+    border: none;
+    position: relative;
+    top: 50%;
+    margin: 20px;
 }

@@ -20,9 +20,14 @@ function TodoListCreate(props) {
     return (
         <div id="todo-list-create">
             <form>
-                <input type="text" value={username} onChange={handleChange}/>
-                <input type="submit" value="+" className="plus-sign" onClick={handleSubmit}/>
+                <div>
+                    <label>New Column: &nbsp;
+                    <input type="text" className="name-input" value={username} onChange={handleChange}/>
+                    </label>
+                </div>
+                <button type="submit" className="plus-sign" onClick={handleSubmit}>+</button>
             </form>
+            {/* <span onClick={handleSubmit}>+</span> */}
         </div>
     )
 }
