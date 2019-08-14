@@ -5,7 +5,6 @@ const initialState = {
             unassigned: [
                     { desc: 'get this to work', completed: true}
                 ],
-            woops: []
         },
     users: []
 };
@@ -47,6 +46,14 @@ export const reducer = (state = initialState, action) => {
                             return todo;
                         }
                     })
+                }
+            }
+        case 'ADD_TODO_LIST':
+            return {
+                ...state,
+                columns: {
+                    ...state.columns,
+                    [action.colName] : []
                 }
             }
         default: 

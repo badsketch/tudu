@@ -6,11 +6,6 @@ import TodoItem from 'components/TodoItem';
 import { connect } from 'react-redux';
 
 class TodoList extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     handleClick = (index, column) => {
         this.props.dispatch({ type: 'COMPLETE_TODO', index, column })
     }
@@ -22,7 +17,7 @@ class TodoList extends React.Component {
     render() {
         return (
             <div id="todo-list">
-                <header>Todos</header>
+                <header>{this.props.column}</header>
                 {
                     this.props.todoList.map((todo, idx) => 
                         <TodoItem 

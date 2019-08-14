@@ -21,3 +21,10 @@ export function CompleteTodo(index, column) {
         column
     }
 }
+
+export function AddTodoList(colName) {
+    return {
+        type: 'ADD_TODO_LIST',
+        colName
+    }
+}
