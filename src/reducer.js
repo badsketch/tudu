@@ -10,6 +10,7 @@ const initialState = {
     users: []
 };
 
+
 export const reducer = (state = initialState, action) => {
     console.log('prev: ', state);
     switch (action.type) {
