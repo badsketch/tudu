@@ -21,7 +21,7 @@ export const reducer = (state = initialState, action) => {
                     ...state.columns,
                     [action.column]: {
                         ...state.columns[action.column],
-                        [todoId++]: { desc: action.text, completed: false }
+                        [todoId++]: { desc: action.text, completed: action.completed }
                     }
                 }
             } 

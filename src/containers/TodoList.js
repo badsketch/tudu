@@ -23,9 +23,8 @@ function TodoList(props) {
         props.dispatch({ type: 'REMOVE_TODO', index, column });
     }
 
-    const bgColor = isOver ? 'red' : ''
     return (
-        <div id="todo-list" ref={drop} style={{ backgroundColor: bgColor}}>
+        <div id="todo-list" ref={drop} style={{ opacity: isOver ? '0.5' : '1'}}>
             <h3 className="title">{props.column}</h3>
             {
                 props.todoList.map(([id, todo]) => 

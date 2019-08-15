@@ -1,8 +1,9 @@
-export function AddTodo(text, column) {
+export function AddTodo(text, column, completed = false) {
     return {
         type: 'ADD_TODO',
         text,
-        column
+        column,
+        completed
     }
 }
 

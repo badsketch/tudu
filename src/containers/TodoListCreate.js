@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 function TodoListCreate(props) {
 
-    const [username, createName] = useState("")
+    const [newColName, createName] = useState("")
 
     const handleChange = e => {
         createName(e.target.value);
@@ -13,8 +13,10 @@ function TodoListCreate(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        props.dispatch(AddTodoList(username))
-        createName("");
+        if (newColName !== "") {
+            props.dispatch(AddTodoList(newColName))
+            createName("");
+        }
     }
 
     return (
@@ -22,7 +24,7 @@ function TodoListCreate(props) {
             <form>
                 <div>
                     <label>New Column: &nbsp;
-                    <input type="text" className="name-input" value={username} onChange={handleChange}/>
+                    <input type="text" className="name-input" value={newColName} onChange={handleChange}/>
                     </label>
                 </div>
                 <button type="submit" className="plus-sign" onClick={handleSubmit}>+</button>
