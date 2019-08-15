@@ -19,13 +19,13 @@ class TodoList extends React.Component {
             <div id="todo-list">
                 <h3 className="title">{this.props.column}</h3>
                 {
-                    this.props.todoList.map((todo, idx) => 
+                    this.props.todoList.map(([id, todo]) => 
                         <TodoItem 
-                            key={idx}
+                            key={id}
                             text={todo.desc}
                             completed={todo.completed}
-                            onClick={() => this.handleClick(idx, this.props.column)}
-                            onRemove={() => this.handleRemove(idx, this.props.column)}
+                            onClick={() => this.handleClick(id, this.props.column)}
+                            onRemove={() => this.handleRemove(id, this.props.column)}
                         />
                     )
                 }
@@ -37,7 +37,7 @@ class TodoList extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        todoList: state.columns[ownProps.column]
+        todoList: Object.entries(state.columns[ownProps.column])
     }
 }
 export default connect(mapStateToProps)(TodoList);
