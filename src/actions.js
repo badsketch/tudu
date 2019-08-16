@@ -15,9 +15,9 @@ export function RemoveTodo(index, column) {
     }
 }
 
-export function CompleteTodo(index, column) {
+export function ToggleTodo(index, column) {
     return {
-        type: 'COMPLETE_TODO',
+        type: 'TOGGLE_TODO',
         index,
         column
     }

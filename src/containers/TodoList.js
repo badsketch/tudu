@@ -5,6 +5,7 @@ import TodoItem from 'components/TodoItem';
 import { connect } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../Constants';
+import { ToggleTodo, RemoveTodo } from '../actions';
 
 function TodoList(props) {
 
@@ -16,11 +17,11 @@ function TodoList(props) {
         })
     })
     const handleClick = (index, column) => {
-        props.dispatch({ type: 'COMPLETE_TODO', index, column })
+        props.dispatch(ToggleTodo(index, column))
     }
 
     const handleRemove = (index, column) => {
-        props.dispatch({ type: 'REMOVE_TODO', index, column });
+        props.dispatch(RemoveTodo(index, column));
     }
 
     return (
