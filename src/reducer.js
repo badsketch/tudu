@@ -1,13 +1,22 @@
 import { combineReducers } from 'redux';
 
-let todoListId = 1;
+let todoListId = 2;
+
 const columnsInitialState = [
     {
         id: 1,
         name: 'unassigned',
         items: [
-            { desc: 'get this to work', completed: true }
+            { desc: 'get this to work', completed: true },
+            { desc: 'another', completed: false },
+            { desc: 'one', completed: false },
+            { desc: 'here', completed: false },
         ]
+    },
+    {
+        id: 2,
+        name: 'other',
+        items: []
     }
 ]
 
@@ -24,8 +33,9 @@ function todolists(state = columnsInitialState, action) {
                 }
             ]
         case 'ADD_TODO':
+        case 'ADD_TODO_AT_INDEX':
         case 'REMOVE_TODO':
-        case 'TOGGLE_TODO':
+        case 'TOGGLE_TODO':        
             return state.map(column => {
                 if (column.id === action.columnId) {
                     return {
@@ -48,6 +58,16 @@ function todos(state, action) {
             return [
                 ...state,
                 { desc: action.text, completed: action.completed }
+            ]
+        case 'ADD_TODO_AT_INDEX':
+            const temp = [
+                ...state.slice(0, action.srcIndex),
+                ...state.slice(action.srcIndex + 1)
+            ]
+            return [
+                ...temp.slice(0, action.destIndex),
+                { desc: action.text, completed: action.completed },
+                ...temp.slice(action.destIndex)
             ]
         case 'REMOVE_TODO':
 
