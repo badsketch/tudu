@@ -8,11 +8,11 @@ import { AddTodo, RemoveTodo } from '../actions';
 function TodoItem(props) {
 
     const [{isDragging}, drag] = useDrag({
-        item: { type: ItemTypes.TODO, desc: props.text, colSrc: props.colName, completed: props.completed },
+        item: { type: ItemTypes.TODO, desc: props.text, colSrc: props.colId, completed: props.completed },
         end: (item, monitor) => {
             if (monitor.didDrop()) {
                 const result = monitor.getDropResult();
-                props.dispatch(AddTodo(item.desc, result.colName, item.completed));
+                props.dispatch(AddTodo(item.desc, result.colId, item.completed));
                 props.dispatch(RemoveTodo(props.id, item.colSrc))
             }
         },

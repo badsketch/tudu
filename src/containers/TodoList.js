@@ -11,7 +11,7 @@ function TodoList(props) {
 
     const [{ isOver },drop] = useDrop({
         accept: ItemTypes.TODO,
-        drop: () => ({ colName: props.column }),
+        drop: () => ({ colId: props.id }),
         collect: monitor => ({
             isOver: !!monitor.isOver(),
         })
@@ -26,21 +26,21 @@ function TodoList(props) {
 
     return (
         <div id="todo-list" ref={drop} style={{ opacity: isOver ? '0.5' : '1'}}>
-            <h3 className="title">{props.column}</h3>
+            <h3 className="title">{props.name}</h3>
             {
-                props.todoList.map(([id, todo]) => 
+                props.todos.map(({desc, completed}, idx) => 
                     <TodoItem 
-                        key={id}
-                        text={todo.desc}
-                        completed={todo.completed}
-                        onClick={() => handleClick(id, props.column)}
-                        onRemove={() => handleRemove(id, props.column)}
-                        id={id}
-                        colName={props.column}
+                        key={idx} 
+                        text={desc}
+                        completed={completed}
+                        onClick={() => handleClick(idx, props.id)}
+                        onRemove={() => handleRemove(idx, props.id)}
+                        id={idx}
+                        colId={props.id}
                     />
                 )
             }
-            <TodoCreateForm todoColumn={props.column} />
+            <TodoCreateForm todoColumn={props.id} />
         </div>
     )
 }
@@ -48,8 +48,10 @@ function TodoList(props) {
 
 
 function mapStateToProps(state, ownProps) {
+    const todoList = state.columns.filter(col => col.id === ownProps.id)[0];
     return {
-        todoList: Object.entries(state.columns[ownProps.column])
+        name: todoList.name,
+        todos: todoList.items
     }
 }
 export default connect(mapStateToProps)(TodoList);

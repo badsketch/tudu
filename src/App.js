@@ -15,8 +15,8 @@ function App(props) {
       <Columns>
       <DndProvider backend={HTMl5Backend}>
         {
-            props.todoLists.map(tl => <TodoList key={tl} column={tl} />)
-          }
+          props.todoLists.map(tl => <TodoList key={tl.id} id={tl.id} name={tl.name} />)
+        }
         </DndProvider>
         <TodoListCreate />
       </Columns>
@@ -26,7 +26,7 @@ function App(props) {
 
 function mapStateToProps(state) {
   return {
-    todoLists: Object.keys(state.columns)
+    todoLists: state.columns
   }
 }
 

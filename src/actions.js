@@ -1,25 +1,25 @@
-export function AddTodo(text, column, completed = false) {
+export function AddTodo(text, columnId, completed = false) {
     return {
         type: 'ADD_TODO',
         text,
-        column,
+        columnId,
         completed
     }
 }
 
-export function RemoveTodo(index, column) {
+export function RemoveTodo(index, columnId) {
     return {
         type: 'REMOVE_TODO',
         index,
-        column
+        columnId
     }
 }
 
-export function ToggleTodo(index, column) {
+export function ToggleTodo(index, columnId) {
     return {
         type: 'TOGGLE_TODO',
         index,
-        column
+        columnId
     }
 }
 

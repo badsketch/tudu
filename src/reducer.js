@@ -1,28 +1,41 @@
 import { combineReducers } from 'redux';
 
-let todoId = 2;
-
-const initialState = {
-    unassigned: {
-            1: { desc: 'get this to work', completed: true}
-        }
-};
+let todoListId = 1;
+const columnsInitialState = [
+    {
+        id: 1,
+        name: 'unassigned',
+        items: [
+            { desc: 'get this to work', completed: true }
+        ]
+    }
+]
 
 // todo list column creation
-function todolists(state = initialState, action) {
+function todolists(state = columnsInitialState, action) {
     switch (action.type) {
         case 'ADD_TODO_LIST':
-            return {
+            return [
                 ...state,
-                [action.colName] : []
-            }
+                {
+                    id: ++todoListId,
+                    name: action.colName,
+                    items: []
+                }
+            ]
         case 'ADD_TODO':
         case 'REMOVE_TODO':
         case 'TOGGLE_TODO':
-            return {
-                ...state,
-                [action.column] : todos(state[action.column], action)
-            }
+            return state.map(column => {
+                if (column.id === action.columnId) {
+                    return {
+                        ...column,
+                        items: todos(column.items, action)
+                    }
+                } else {
+                    return column;
+                }
+            })
         default:
             return state;
     }
@@ -32,20 +45,24 @@ function todolists(state = initialState, action) {
 function todos(state, action) {
     switch (action.type) {
         case 'ADD_TODO':
-            return {
+            return [
                 ...state,
-                [++todoId] : { desc: action.text, completed: action.completed }
-            }
+                { desc: action.text, completed: action.completed }
+            ]
         case 'REMOVE_TODO':
-            const { [action.index]: value, ...theRest } = state
-            return {
-                ...theRest
-            }
+
+            return [
+                ...state.slice(0, action.index),
+                ...state.slice(action.index + 1)
+            ]
         case 'TOGGLE_TODO':
-            return {
-                ...state,
-                [action.index]: todo(state[action.index], action)
-            }
+            return state.map((t, idx) => {
+                if (idx === action.index) {
+                    return todo(t, action);
+                } else {
+                    return t;
+                }
+            })
         default:
             return state
     }
