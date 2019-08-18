@@ -3,7 +3,7 @@ import './TodoItem.css';
 import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from '../Constants';
 import { connect } from 'react-redux';
-import { AddTodo, AddTodoAtIndex, RemoveTodo, Swap } from '../actions';
+import { AddTodo, MoveTodo, RemoveTodo, Swap } from '../actions';
 
 function TodoItem(props) {
     const ref = useRef(null);
@@ -14,7 +14,7 @@ function TodoItem(props) {
             desc: props.text, 
             colSrc: props.colId, 
             completed: props.completed,
-            index: props.id
+            index: props.index
         },
         end: (item, monitor) => {
             // if (monitor.didDrop()) {
@@ -37,12 +37,11 @@ function TodoItem(props) {
             }
 
             const dragIndex = item.index;
-            const hoverIndex = props.id;
+            const hoverIndex = props.index;
 
             if (dragIndex === hoverIndex) {
                 return;
             }
-
             const hoverBoundingRect = ref.current.getBoundingClientRect();
 
             const hoverMiddleY =
@@ -59,15 +58,7 @@ function TodoItem(props) {
             if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
                 return;
             }
-            console.log('DRAG: ', dragIndex);
-            console.log('HOVER: ', hoverIndex);
-            // if (dragIndex > hoverIndex) {
-
-            // }
-            props.onMove(item.desc, item.colSrc, item.completed, dragIndex, hoverIndex)
-            // props.dispatch(Swap(item.desc, item.colSrc, item.completed, dragIndex, hoverIndex))
-            // props.dispatch(RemoveTodo(dragIndex, item.colSrc));
-            // props.dispatch(AddTodoAtIndex(item.desc, item.colSrc, item.completed, hoverIndex ));
+            props.dispatch(MoveTodo(item.colSrc, dragIndex, hoverIndex))
 
             item.index = hoverIndex;
         }
@@ -76,8 +67,8 @@ function TodoItem(props) {
     return (
         <div ref={ref} id="todo-item" style={{ opacity: isDragging ? 0 : 1 }}>
             <span 
-            style={{textDecoration: props.completed ? 'line-through' : ''}}
-            onClick={props.onClick}  
+                style={{textDecoration: props.completed ? 'line-through' : ''}}
+                onClick={props.onClick}  
             >
                 {props.text}
             </span>

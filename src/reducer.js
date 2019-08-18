@@ -1,16 +1,14 @@
 import { combineReducers } from 'redux';
 
-let todoListId = 2;
-
 const columnsInitialState = [
     {
         id: 1,
         name: 'unassigned',
         items: [
-            { desc: 'get this to work', completed: true },
-            { desc: 'another', completed: false },
-            { desc: 'one', completed: false },
-            { desc: 'here', completed: false },
+            // { id: 1, desc: 'get this to work', completed: true },
+            { id: 2, desc: 'another', completed: false },
+            { id: 3, desc: 'one', completed: false },
+            { id: 4, desc: 'here', completed: false },
         ]
     },
     {
@@ -21,6 +19,7 @@ const columnsInitialState = [
 ]
 
 // todo list column creation
+let todoListId = 2;
 function todolists(state = columnsInitialState, action) {
     switch (action.type) {
         case 'ADD_TODO_LIST':
@@ -33,7 +32,7 @@ function todolists(state = columnsInitialState, action) {
                 }
             ]
         case 'ADD_TODO':
-        case 'ADD_TODO_AT_INDEX':
+        case 'MOVE_TODO':
         case 'REMOVE_TODO':
         case 'TOGGLE_TODO':        
             return state.map(column => {
@@ -52,32 +51,30 @@ function todolists(state = columnsInitialState, action) {
 } 
 
 // todo creation and deletion
+let todoId = 4;
 function todos(state, action) {
     switch (action.type) {
         case 'ADD_TODO':
             return [
                 ...state,
-                { desc: action.text, completed: action.completed }
+                { id: ++todoId, desc: action.text, completed: action.completed }
             ]
-        case 'ADD_TODO_AT_INDEX':
+        case 'MOVE_TODO':
             const temp = [
                 ...state.slice(0, action.srcIndex),
                 ...state.slice(action.srcIndex + 1)
             ]
+            const dragCard = state[action.srcIndex];
             return [
                 ...temp.slice(0, action.destIndex),
-                { desc: action.text, completed: action.completed },
+                dragCard,
                 ...temp.slice(action.destIndex)
             ]
         case 'REMOVE_TODO':
-
-            return [
-                ...state.slice(0, action.index),
-                ...state.slice(action.index + 1)
-            ]
+            return state.filter(t => t.id !== action.index);
         case 'TOGGLE_TODO':
-            return state.map((t, idx) => {
-                if (idx === action.index) {
+            return state.map(t => {
+                if (t.id === action.index) {
                     return todo(t, action);
                 } else {
                     return t;

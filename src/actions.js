@@ -7,21 +7,10 @@ export function AddTodo(text, columnId, completed = false) {
     }
 }
 
-export function AddTodoAtIndex(text, columnId, completed = false, index) {
+export function MoveTodo(columnId, srcIndex, destIndex) {
     return {
-        type: 'ADD_TODO_AT_INDEX',
-        text,
+        type: 'MOVE_TODO',
         columnId,
-        completed,
-        index
-    }
-}
-export function Swap(text, columnId, completed = false, srcIndex, destIndex) {
-    return {
-        type: 'ADD_TODO_AT_INDEX',
-        text,
-        columnId,
-        completed,
         srcIndex,
         destIndex
     }
