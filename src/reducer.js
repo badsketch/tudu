@@ -1,20 +1,24 @@
 import { combineReducers } from 'redux';
-
+import { RemoveTodo } from './actions';
+import update from 'immutability-helper';
 const columnsInitialState = [
     {
         id: 1,
         name: 'unassigned',
         items: [
             // { id: 1, desc: 'get this to work', completed: true },
-            { id: 2, desc: 'another', completed: false },
-            { id: 3, desc: 'one', completed: false },
-            { id: 4, desc: 'here', completed: false },
+            { id: 2, desc: 'a', completed: false },
+            { id: 3, desc: 'b', completed: false },
         ]
     },
     {
         id: 2,
         name: 'other',
-        items: []
+        items: [
+            { id: 4, desc: 'x', completed: false },
+            { id: 5, desc: 'z', completed: false },
+
+        ]
     }
 ]
 
@@ -31,6 +35,39 @@ function todolists(state = columnsInitialState, action) {
                     items: []
                 }
             ]
+        case 'MOVE_TODO_TO_COLUMN':
+            const dragCard = state.find(col => col.id === action.srcColumnId).items[action.srcIndex];
+            return state.map(column => {
+                if (column.id === action.srcColumnId) {
+                    return {
+                        ...column,
+                        items: column.items.filter((it, idx) => idx !== action.srcIndex)
+                    }
+                } else if (column.id === action.destColumnId) {
+                    return {
+                        ...column,
+                        items: [
+                            ...column.items.slice(0, action.destIndex),
+                            // { id: ++todoId, desc: 'NEW', completed: false},
+                            dragCard,
+                            ...column.items.slice(action.destIndex)
+                        ]
+                    }
+                    // return update(column, {
+                    //     items: { $splice: [[], [action.destIndex, 0, dragCard]] } 
+                    // }
+                        
+                    //)
+                } else {
+                    return column;
+                }
+                // else if (column.id === action.destColumnId) {
+                //     return {
+                //         ...column,
+                //         items: todos(column.items, { type: 'ADD_TODO', index: action.destIndex })
+                //     }
+                // } 
+            })
         case 'ADD_TODO':
         case 'MOVE_TODO':
         case 'REMOVE_TODO':
@@ -51,14 +88,22 @@ function todolists(state = columnsInitialState, action) {
 } 
 
 // todo creation and deletion
-let todoId = 4;
+let todoId = 5;
 function todos(state, action) {
     switch (action.type) {
         case 'ADD_TODO':
-            return [
-                ...state,
-                { id: ++todoId, desc: action.text, completed: action.completed }
-            ]
+            if (action.index < 0) {
+                return [
+                    ...state,
+                    { id: ++todoId, desc: action.text, completed: action.completed }
+                ]
+            } else {
+                return [
+                    ...state.slice(0, action.index),
+                    { id: ++todoId, desc: action.text, completed: action.completed },
+                    ...state.slice(action.index)
+                ]
+            }
         case 'MOVE_TODO':
             const temp = [
                 ...state.slice(0, action.srcIndex),

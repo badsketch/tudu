@@ -3,7 +3,7 @@ import './TodoItem.css';
 import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from '../Constants';
 import { connect } from 'react-redux';
-import { AddTodo, MoveTodo, RemoveTodo, Swap } from '../actions';
+import { AddTodo, MoveTodo, RemoveTodo, Swap, MoveTodoToColumn } from '../actions';
 
 function TodoItem(props) {
     const ref = useRef(null);
@@ -35,11 +35,14 @@ function TodoItem(props) {
             if (!ref.current) {
                 return
             }
-
             const dragIndex = item.index;
             const hoverIndex = props.index;
+            const srcCol = item.colSrc;
+            const destCol = props.colId;
 
-            if (dragIndex === hoverIndex) {
+            // if it's the same item, don't do anything
+            // checking col otherwise can't drag to adjacent column at same level
+            if (dragIndex === hoverIndex && srcCol === destCol) {
                 return;
             }
             const hoverBoundingRect = ref.current.getBoundingClientRect();
@@ -58,7 +61,13 @@ function TodoItem(props) {
             if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
                 return;
             }
-            props.dispatch(MoveTodo(item.colSrc, dragIndex, hoverIndex))
+
+            if (srcCol !== destCol) {
+                item.colSrc = destCol
+                props.dispatch(MoveTodoToColumn(srcCol, destCol, dragIndex, hoverIndex));
+            } else {
+                props.dispatch(MoveTodo(srcCol, dragIndex, hoverIndex))
+            }
 
             item.index = hoverIndex;
         }
@@ -70,6 +79,7 @@ function TodoItem(props) {
                 style={{textDecoration: props.completed ? 'line-through' : ''}}
                 onClick={props.onClick}  
             >
+                {/* {isDragging ? '' : ' not '}being dragged&nbsp; */}
                 {props.text}
             </span>
             <span className="remove" onClick={props.onRemove}>&times;</span>
