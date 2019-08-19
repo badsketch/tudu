@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { RemoveTodo } from './actions';
-import update from 'immutability-helper';
+
 const columnsInitialState = [
     {
         id: 1,
@@ -8,7 +8,7 @@ const columnsInitialState = [
         items: [
             // { id: 1, desc: 'get this to work', completed: true },
             { id: 2, desc: 'a', completed: false },
-            { id: 3, desc: 'b', completed: false },
+            // { id: 3, desc: 'b', completed: false },
         ]
     },
     {
@@ -48,25 +48,13 @@ function todolists(state = columnsInitialState, action) {
                         ...column,
                         items: [
                             ...column.items.slice(0, action.destIndex),
-                            // { id: ++todoId, desc: 'NEW', completed: false},
                             dragCard,
                             ...column.items.slice(action.destIndex)
                         ]
                     }
-                    // return update(column, {
-                    //     items: { $splice: [[], [action.destIndex, 0, dragCard]] } 
-                    // }
-                        
-                    //)
                 } else {
                     return column;
                 }
-                // else if (column.id === action.destColumnId) {
-                //     return {
-                //         ...column,
-                //         items: todos(column.items, { type: 'ADD_TODO', index: action.destIndex })
-                //     }
-                // } 
             })
         case 'ADD_TODO':
         case 'MOVE_TODO':

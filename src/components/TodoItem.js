@@ -17,11 +17,10 @@ function TodoItem(props) {
             index: props.index
         },
         end: (item, monitor) => {
-            // if (monitor.didDrop()) {
-            //     const result = monitor.getDropResult();
-            //     props.dispatch(AddTodo(item.desc, result.colId, item.completed));
-            //     props.dispatch(RemoveTodo(props.id, item.colSrc))
-            // }
+            if (monitor.didDrop()) {
+                const result = monitor.getDropResult();
+                props.dispatch(MoveTodoToColumn(item.colSrc, result.colId, item.index, 0))
+            }
         },
         collect: monitor => ({
             isDragging: monitor.isDragging(),
@@ -31,6 +30,7 @@ function TodoItem(props) {
 
     const [, drop] = useDrop({
         accept: ItemTypes.TODO,
+        canDrop: (item, monitor) => false,
         hover(item, monitor) {
             if (!ref.current) {
                 return
@@ -79,8 +79,7 @@ function TodoItem(props) {
                 style={{textDecoration: props.completed ? 'line-through' : ''}}
                 onClick={props.onClick}  
             >
-                {/* {isDragging ? '' : ' not '}being dragged&nbsp; */}
-                {props.text}
+            {props.text}
             </span>
             <span className="remove" onClick={props.onRemove}>&times;</span>
     </div> 

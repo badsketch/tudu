@@ -9,14 +9,14 @@ import { ToggleTodo, RemoveTodo, MoveTodo } from '../actions';
 
 function TodoList(props) {
 
-    // const [{ isOver },drop] = useDrop({
-    //     accept: ItemTypes.TODO,
-    //     drop: () => ({ colId: props.id }),
-    //     // canDrop: (item, monitor) => item.colSrc !== props.id,
-    //     collect: monitor => ({
-    //         isOver: !!monitor.isOver(),
-    //     })
-    // })
+    const [{ isOver },drop] = useDrop({
+        accept: ItemTypes.TODO,
+        canDrop: (item, monitor) => item.colSrc !== props.id && !props.todos.length,
+        drop: () => ({ colId: props.id }),
+        collect: monitor => ({
+            isOver: !!monitor.isOver(),
+        })
+    })
     const handleClick = (index, column) => {
         props.dispatch(ToggleTodo(index, column))
     }
@@ -34,11 +34,12 @@ function TodoList(props) {
     // )
 
     return (
-        // <div id="todo-list" ref={drop} style={{ border: isOver ? '2px solid rgba(173, 216, 230, 0.3)' : '2px solid lightblue'}}>
-            <div id="todo-list">
+        <div id="todo-list" ref={drop} style={{ border: isOver ? '2px solid rgba(173, 216, 230, 0.3)' : '2px solid lightblue'}}>
+            {/* <div id="todo-list"> */}
             <h3 className="title">{props.name}</h3>
             {
-                props.todos.map(({id, desc, completed}, idx) => 
+                props.todos.map(({id, desc, completed}, idx) =>
+                
                     <TodoItem 
                         key={id} 
                         text={desc}
@@ -63,7 +64,7 @@ function mapStateToProps(state, ownProps) {
     const todoList = state.columns.filter(col => col.id === ownProps.id)[0];
     return {
         name: todoList.name,
-        todos: todoList.items
+        todos: todoList.items,
     }
 }
 export default connect(mapStateToProps)(TodoList);
