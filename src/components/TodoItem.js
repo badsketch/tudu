@@ -3,7 +3,7 @@ import './TodoItem.css';
 import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from '../Constants';
 import { connect } from 'react-redux';
-import { AddTodo, MoveTodo, RemoveTodo, Swap, MoveTodoToColumn } from '../actions';
+import { MoveTodo, MoveTodoToColumn } from '../actions';
 
 function TodoItem(props) {
     const ref = useRef(null);
@@ -11,9 +11,7 @@ function TodoItem(props) {
     const [{isDragging}, drag] = useDrag({
         item: { 
             type: ItemTypes.TODO, 
-            desc: props.text, 
             colSrc: props.colId, 
-            completed: props.completed,
             index: props.index
         },
         end: (item, monitor) => {

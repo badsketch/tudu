@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react';
+import React/*, { useCallback }*/ from 'react';
 import './TodoList.css';
 import TodoCreateForm from './TodoCreateForm';
 import TodoItem from 'components/TodoItem';
 import { connect } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../Constants';
-import { ToggleTodo, RemoveTodo, MoveTodo } from '../actions';
+import { ToggleTodo, RemoveTodo, /*MoveTodo*/ } from '../actions';
 
 function TodoList(props) {
 

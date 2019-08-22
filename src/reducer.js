@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { RemoveTodo } from './actions';
 
 const columnsInitialState = [
     {
