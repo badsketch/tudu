@@ -5,7 +5,7 @@ import TodoItem from 'components/TodoItem';
 import { connect } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../Constants';
-import { ToggleTodo, RemoveTodo, /*MoveTodo*/ } from '../actions';
+import { ToggleTodo, RemoveTodo, /*MoveTodo*/ } from '../store/todoActions';
 
 function TodoList(props) {
 

@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 
 const columnsInitialState = [
     {
@@ -131,8 +130,5 @@ function todo(state, action) {
 }
 
 
-export default combineReducers({
-    columns: todolists,
-})
-
+export default todolists
 

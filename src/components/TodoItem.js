@@ -3,7 +3,7 @@ import './TodoItem.css';
 import { useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from '../Constants';
 import { connect } from 'react-redux';
-import { MoveTodo, MoveTodoToColumn } from '../actions';
+import { MoveTodo, MoveTodoToColumn } from '../store/todoActions';
 
 function TodoItem(props) {
     const ref = useRef(null);
