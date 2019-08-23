@@ -1,0 +1,15 @@
+#title-wrapper {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+#title-wrapper .title {
+    font-size: 26px;
+    font-weight: bold;
+    /* margin-top: 5px; */
+    margin-bottom: 5px;
+}
+
+#title-wrapper .subtitle {
+
+}

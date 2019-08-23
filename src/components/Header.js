@@ -1,13 +1,13 @@
 import React from 'react';
 import './Header.css';
+import Title from 'components/Title';
+import UserCreate from 'containers/UserCreate';
 
 export default function Header() {
     return (
         <div id="header">
-        <h2 >Tudu</h2>
-        <h5>a task organizer (also a kanban board if you squint hard enough)</h5>
-        
-        
+            <Title />
+            <UserCreate />
         </div>
     )
 }

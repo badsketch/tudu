@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import TodoList from 'containers/TodoList';
 import Columns from 'components/Columns';
+import Header from 'components/Header';
 import TodoListCreate from 'containers/TodoListCreate';
 import { DndProvider } from 'react-dnd';
 import HTMl5Backend from 'react-dnd-html5-backend';
@@ -12,6 +13,7 @@ import { connect } from 'react-redux';
 function App(props) {
   return (
     <div className="App">
+      <Header />
       <Columns>
       <DndProvider backend={HTMl5Backend}>
         {

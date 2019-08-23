@@ -1,4 +1,6 @@
 #header {
-    width: 100%;
-    margin-left: 20px;
+    height: 100px;
+    position: fixed;
+    margin: 20px;
+    z-index: 1;
 }
