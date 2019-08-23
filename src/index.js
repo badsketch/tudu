@@ -9,10 +9,12 @@ import { Provider } from 'react-redux';
 import { combineReducers } from 'redux';
 import todolists from './store/todoReducer';
 import users from './store/userReducer';
+import filter from './store/filterReducer';
 
 const reducer = combineReducers({
     columns: todolists,
-    users
+    users,
+    filter
 })
 
 const store = createStore(

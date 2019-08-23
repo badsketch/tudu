@@ -6,11 +6,13 @@ import { connect } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../Constants';
 import { ToggleTodo, RemoveTodo, /*MoveTodo*/ } from '../store/todoActions';
+import { Filter } from '../store/filterReducer';
 
 function TodoList(props) {
 
     const [{ isOver },drop] = useDrop({
         accept: ItemTypes.TODO,
+        // THIS HAS TO BE FILTERED TOO
         canDrop: (item, monitor) => item.colSrc !== props.id && !props.todos.length,
         drop: () => ({ colId: props.id }),
         collect: monitor => ({
@@ -38,7 +40,8 @@ function TodoList(props) {
             {/* <div id="todo-list"> */}
             <h3 className="title">{props.name}</h3>
             {
-                props.todos.map(({id, desc, completed, assignedTo}, idx) =>
+                props.todos
+                .map(({id, desc, completed, assignedTo}, idx) =>
                 
                     <TodoItem 
                         key={id} 
@@ -62,10 +65,30 @@ function TodoList(props) {
 
 
 function mapStateToProps(state, ownProps) {
+    const {filterType, userId} = state.filter;
     const todoList = state.columns.filter(col => col.id === ownProps.id)[0];
+    const filteredTodos = todoList.items
+        .filter(t => {
+            switch (filterType) {
+                case Filter.SHOW_ALL:
+                    return t;
+                case Filter.SHOW_COMPLETE:
+                    return t.completed
+                case Filter.SHOW_INCOMPLETE:
+                    return !t.completed
+                case Filter.SHOW_BY_USER:
+                    return t.assignedTo === userId
+                default:
+                    return t;
+            }
+        })
     return {
         name: todoList.name,
-        todos: todoList.items,
+        todos: filteredTodos,
+        filter: {
+            type: filterType,
+            id: userId
+        }
     }
 }
 export default connect(mapStateToProps)(TodoList);
