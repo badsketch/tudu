@@ -2,7 +2,7 @@
 const columnsInitialState = [
     {
         id: 1,
-        name: 'unassigned',
+        name: 'urgent',
         items: [
             // { id: 1, desc: 'get this to work', completed: true },
             { id: 2, desc: 'complete design', completed: false, assignedTo: 1 },
@@ -11,7 +11,7 @@ const columnsInitialState = [
     },
     {
         id: 2,
-        name: 'other',
+        name: 'next week',
         items: [
             { id: 4, desc: 'implement feature', completed: false, assignedTo: 2 },
             { id: 5, desc: 'integrate api', completed: false, assignedTo: 2},
