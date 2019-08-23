@@ -3,8 +3,8 @@
     margin: 5px 0px;
     display: flex;
     justify-content: space-between;
-    background-color: lightblue;
     border-radius: 4px;
+    color: white;
 }
 
 #todo-item .remove {

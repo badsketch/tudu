@@ -71,8 +71,10 @@ function TodoItem(props) {
         }
     })
     drag(drop(ref));
+
+    const bgColor = props.users[props.assignedTo].color;
     return (
-        <div ref={ref} id="todo-item" style={{ opacity: isDragging ? 0 : 1 }}>
+        <div ref={ref} id="todo-item" style={{ opacity: isDragging ? 0 : 1, backgroundColor: bgColor }}>
             <span 
                 style={{textDecoration: props.completed ? 'line-through' : ''}}
                 onClick={props.onClick}  
@@ -84,4 +86,9 @@ function TodoItem(props) {
     )
 }
 
-export default connect()(TodoItem);
+function mapStateToProps(state) {
+    return {
+        users: state.users
+    }
+}
+export default connect(mapStateToProps)(TodoItem);

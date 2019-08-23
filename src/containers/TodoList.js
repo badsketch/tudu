@@ -38,11 +38,12 @@ function TodoList(props) {
             {/* <div id="todo-list"> */}
             <h3 className="title">{props.name}</h3>
             {
-                props.todos.map(({id, desc, completed}, idx) =>
+                props.todos.map(({id, desc, completed, assignedTo}, idx) =>
                 
                     <TodoItem 
                         key={id} 
                         text={desc}
+                        assignedTo={assignedTo}
                         completed={completed}
                         onClick={() => handleClick(id, props.id)}
                         onRemove={() => handleRemove(id, props.id)}
