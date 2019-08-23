@@ -8,9 +8,11 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { combineReducers } from 'redux';
 import todolists from './store/todoReducer';
+import users from './store/userReducer';
 
 const reducer = combineReducers({
-    columns: todolists
+    columns: todolists,
+    users
 })
 
 const store = createStore(
