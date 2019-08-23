@@ -18,6 +18,7 @@ function UserCreate(props) {
 
     const handleColorPick = (color, event) => {
         setColor(color.hex);
+        setDisplayPicker(!displayPicker);
     }
 
     const handleSubmit = e => {
@@ -28,12 +29,8 @@ function UserCreate(props) {
         }
     }
 
-    const handleClose = () => {
-        setDisplayPicker(false);
-    }
-
-    const handleOpen = () => {
-        setDisplayPicker(true);
+    const togglePicker = () => {
+        setDisplayPicker(!displayPicker);
     }
 
     const popover = {
@@ -41,26 +38,16 @@ function UserCreate(props) {
         zIndex: '2',
     }
 
-    const cover = {
-        position: 'fixed',
-        top: '0px',
-        right: '0px',
-        bottom: '0px',
-        left: '0px',
-    }
-
     return (
         <div id="user-create">
         <form id="user-create-form">
             <input type="text" value={username} onChange={handleChange}/>
-            {/* <input type="colorTrigger" value="color" onClick={handleOpen} /> */}
-            <div className="color-picker" onClick={handleOpen}>
+            <div className="color-picker" onClick={togglePicker}>
                 <div className="swatch" style={{backgroundColor: profileColor }} />
             </div>
             {
                 displayPicker &&
                 <div style={popover}>
-                    <div style={cover} onClick={handleClose}/>
                     <TwitterPicker triangle="hide" onChangeComplete={handleColorPick} color={profileColor}/>
                 </div>
             }
