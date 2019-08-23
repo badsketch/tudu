@@ -6,19 +6,20 @@ export const Filter = {
     SHOW_BY_USER: 'SHOW_BY_USER'
 }
 
-export default function filter(state = Filter.SHOW_ALL, action) {
+
+export default function filter(state = { status: Filter.SHOW_ALL, userId: -1 }, action) {
     switch (action.type) {
-        case 'SET_GENERAL_FILTER':          
+        case 'SET_STATUS_FILTER':
             return {
-                filterType: action.filter,
-                userId: null
-            };
-        case 'SET_ASSIGNMENT_FILTER':
+                ...state,
+                status: action.status
+            }
+        case 'SET_USER_FILTER':
             return {
-                filterType: action.filter,
+                ...state,
                 userId: action.userId
             }
         default:
             return state;
     }
-}                                   
+}

@@ -65,19 +65,24 @@ function TodoList(props) {
 
 
 function mapStateToProps(state, ownProps) {
-    const {filterType, userId} = state.filter;
+    const {status, userId} = state.filter;
     const todoList = state.columns.filter(col => col.id === ownProps.id)[0];
     const filteredTodos = todoList.items
         .filter(t => {
-            switch (filterType) {
+            if (userId === -1) {
+                return t;
+            } else {
+                return t.assignedTo === userId;
+            }
+        })
+        .filter(t => {
+            switch (status) {
                 case Filter.SHOW_ALL:
                     return t;
                 case Filter.SHOW_COMPLETE:
                     return t.completed
                 case Filter.SHOW_INCOMPLETE:
                     return !t.completed
-                case Filter.SHOW_BY_USER:
-                    return t.assignedTo === userId
                 default:
                     return t;
             }
@@ -86,8 +91,8 @@ function mapStateToProps(state, ownProps) {
         name: todoList.name,
         todos: filteredTodos,
         filter: {
-            type: filterType,
-            id: userId
+            status,
+            userId
         }
     }
 }

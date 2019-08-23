@@ -13,8 +13,7 @@ function TodoCreateForm(props) {
     }
 
     const handleSelectChange = e => {
-        setAssigned(e.target.value);
-        console.log(assignedTo);
+        setAssigned(parseInt(e.target.value));
     }
 
     const handleSubmit = e => {

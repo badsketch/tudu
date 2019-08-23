@@ -12,10 +12,17 @@ function Filter(props) {
 
     const [filterUserId, setUserFilter] = useState(1)
     const handleSelectChange = e => {
-        setUserFilter(parseInt(e.target.value));
-        props.dispatch(FilterByUser(filterUserId));
+        console.log(e.target.value);
+        const userId = parseInt(e.target.value);
+        setUserFilter(userId);
+        props.dispatch(FilterByUser(userId));
     }
 
+    const optionStyles = {
+        height: 30,
+        width: 30,
+        borderRadius: '50%',
+    }
     return (
         <div id="visibility-filter">
             <input type="radio" name="general" value="all" 
@@ -25,6 +32,7 @@ function Filter(props) {
             <input type="radio" name="general" value="incomplete" 
                 onClick={() => props.dispatch(FilterByIncomplete())}/>Incomplete
             <select onChange={handleSelectChange}>
+                <option key={-1} value={-1}>-</option>
                 {
                     props.userList.map(([id, { username, color }]) => {
                         return (
@@ -33,6 +41,10 @@ function Filter(props) {
                                 value={id}
                             >
                                 {username}
+                                {/* <span 
+                                    style={{...optionStyles, background: color }}>
+                                    
+                                </span> */}
                             </option>
 
                         )
