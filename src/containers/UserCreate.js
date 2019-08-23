@@ -58,7 +58,7 @@ function UserCreate(props) {
                 displayPicker &&
                 <div style={popover}>
                     <div style={cover} onClick={handleClose}/>
-                    <TwitterPicker triangle="hide" onChangeComplete={handleColorPick}/>
+                    <TwitterPicker triangle="hide" onChangeComplete={handleColorPick} color={profileColor}/>
                 </div>
             }
             <input type="submit" value="Add User" onClick={handleSubmit} />
