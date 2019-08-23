@@ -10,7 +10,7 @@ import {
 
 function Filter(props) {
 
-    const [filterUserId, setUserFilter] = useState(1)
+    const [filterUserId, setUserFilter] = useState(-1)
 
     // const handleSelectChange = e => {
     //     console.log(e.target.value);
@@ -20,9 +20,14 @@ function Filter(props) {
     // }
 
     const handleSelectChange = (userId) => {
-        // const userId = parseInt(e.target.value);
-        setUserFilter(userId);
-        props.dispatch(FilterByUser(userId));
+        if (filterUserId == userId) {
+            setUserFilter(-1);
+            props.dispatch(FilterByUser(-1));
+        } else {
+            const id = parseInt(userId);
+            setUserFilter(id);
+            props.dispatch(FilterByUser(id));
+        }
     }
 
     return (
@@ -62,7 +67,7 @@ function Filter(props) {
                             background: color,
                             border: filterUserId == id ? '1px solid black' : ''
                          }}
-                        onClick={() => handleSelectChange(parseInt(id))}></div>
+                        onClick={() => handleSelectChange(id)}></div>
                     )
                 })
             }
