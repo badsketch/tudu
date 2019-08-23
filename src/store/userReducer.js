@@ -1,7 +1,7 @@
 
 const userInitialState = {
     1: { username: 'dwang', color: '#19635a' },
-    2: { username: 'bsmith', color: '#22194D' },
+    2: { username: 'bsmith', color: '#7BDCB5' },
 }
 
 let userId = 3;

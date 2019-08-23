@@ -1,8 +1,9 @@
-export function AddTodo(text, columnId, completed = false, index = -1) {
+export function AddTodo(text, columnId, assignedTo, completed = false, index = -1) {
     return {
         type: 'ADD_TODO',
         text,
         columnId,
+        assignedTo,
         completed,
         index
     }

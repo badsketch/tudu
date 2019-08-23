@@ -81,7 +81,7 @@ function todos(state, action) {
             if (action.index < 0) {
                 return [
                     ...state,
-                    { id: ++todoId, desc: action.text, completed: action.completed }
+                    { id: ++todoId, desc: action.text, completed: action.completed, assignedTo: action.assignedTo }
                 ]
             } else {
                 return [

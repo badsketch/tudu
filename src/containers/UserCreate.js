@@ -53,7 +53,10 @@ function UserCreate(props) {
         <div id="user-create">
         <form id="user-create-form">
             <input type="text" value={username} onChange={handleChange}/>
-            <input type="button" value="color" onClick={handleOpen} />
+            {/* <input type="colorTrigger" value="color" onClick={handleOpen} /> */}
+            <div className="color-picker" onClick={handleOpen}>
+                <div className="swatch" style={{backgroundColor: profileColor }} />
+            </div>
             {
                 displayPicker &&
                 <div style={popover}>
