@@ -1,11 +1,11 @@
 #visibility-filter {
-    width: 330px;
-    
+    margin-top: 20px;
+    margin-left: 100px;
 }
 
 .user-filter {
     display: flex;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 .user-dot {

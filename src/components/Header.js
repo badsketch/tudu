@@ -8,9 +8,14 @@ export default function Header() {
 
     return (
         <div id="header">
-            <Title />
-            <UserCreate />
-            <Filter />
+            <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column'
+            }}>
+                <Title />
+                <UserCreate />
+            </div>
+                <Filter />
         </div>
     )
 }
